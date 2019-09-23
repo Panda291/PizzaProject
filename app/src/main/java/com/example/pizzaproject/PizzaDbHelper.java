@@ -29,6 +29,11 @@ public class PizzaDbHelper extends SQLiteOpenHelper {
 
         db.insert("pizza", null, values);
         values = new ContentValues();
+
+        values.put("name", "test pizza");
+        values.put("price", 999.00);
+
+        db.insert("pizza", null, values);
     }
 
     @Override

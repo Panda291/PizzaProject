@@ -26,7 +26,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.L
         PizzaDbHelper databaseHelper = new PizzaDbHelper(this);
         final SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        Cursor databaseOutput = db.rawQuery("select * from pizza", null);
+        String[] tableColumns = new String[] {
+                "name",
+                "id",
+                "price"
+        };
+        String whereClause = "";
+        String[] whereArgs = new String[] {
+        };
+        String orderBy = "id";
+        Cursor databaseOutput = db.query("pizza", tableColumns, whereClause, whereArgs, null, null, orderBy);
 
         databaseOutput.moveToFirst();
         Log.d("databaseoutput", databaseOutput.getString(1));
