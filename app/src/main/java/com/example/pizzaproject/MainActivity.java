@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import java.net.URI;
 
 public class MainActivity extends AppCompatActivity implements RecyclerAdapter.ListItemClickListener{
 
@@ -17,25 +21,28 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.L
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e("MainActivity", "onCreate");
+        Log.d("MainActivity", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-        PizzaDbHelper databaseHelper = new PizzaDbHelper(this);
-        final SQLiteDatabase db = databaseHelper.getReadableDatabase();
+//        PizzaDbHelper databaseHelper = new PizzaDbHelper(this);
+//        final SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        ContentResolver resolver = getContentResolver();
+
 
         String[] tableColumns = new String[] {
                 "name",
                 "id",
                 "price"
         };
-        String whereClause = "";
+        String whereClause = null;
         String[] whereArgs = new String[] {
         };
         String orderBy = "id";
-        Cursor databaseOutput = db.query("pizza", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        Uri uri = Uri.parse("content://com.example.pizzaproject.PizzaContentProvider/pizza");
+        Cursor databaseOutput = resolver.query(uri, tableColumns, whereClause, whereArgs, orderBy);
 
         databaseOutput.moveToFirst();
         Log.d("databaseoutput", databaseOutput.getString(1));

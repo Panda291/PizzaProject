@@ -3,25 +3,50 @@ package com.example.pizzaproject;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class PizzaContentProvider extends ContentProvider {
+    public static final String AUTHORITY = "com.example.pizzaproject.PizzaContentProvider";
+    public static final String PIZZA_PATH = "pizza";
+    public static final int ALL_PIZZAS = 100;
+    public static final int PIZZA_ID = 101;
+    public static UriMatcher uriMatcher = buildUriMatcher();
+
+    PizzaDbHelper mPizzaDbHelper;
+    SQLiteDatabase db;
+
     @Override
     public boolean onCreate() {
         Context context = getContext();
-        PizzaDbHelper mPizzaDbHelper = new PizzaDbHelper(context);
-
+        mPizzaDbHelper = new PizzaDbHelper(context);
+        db = mPizzaDbHelper.getReadableDatabase();
         return true;
     }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        Log.d("ContentProviderQuery", "main");
+        int match = uriMatcher.match(uri);
+        switch (match) {
+            case ALL_PIZZAS:
+                Log.d("ContentProviderQuery", "ALL_PIZZAS");
+                Cursor databaseOutput = db.query("pizza", projection, selection, selectionArgs, null, null, sortOrder);
+                return databaseOutput;
+            case PIZZA_ID:
+                Log.d("ContentProviderQuery", "PIZZA_ID");
+                return null;
+            default:
+                Log.d("ContentProviderQuery", "default");
+                return null;
+        }
     }
 
     @Nullable
@@ -44,5 +69,14 @@ public class PizzaContentProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         return 0;
+    }
+
+    public static UriMatcher buildUriMatcher() {
+        Log.d("UriMatcher", "main");
+        UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(AUTHORITY, PIZZA_PATH, ALL_PIZZAS);
+        uriMatcher.addURI(AUTHORITY, PIZZA_PATH + "/#", PIZZA_ID);
+
+        return uriMatcher;
     }
 }
