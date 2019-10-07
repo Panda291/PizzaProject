@@ -19,5 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(findViewById(R.id.tablet) != null)
+        {
+            Log.d("Main/OnCreate", "tablet");
+        }
     }
 }
