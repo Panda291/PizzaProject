@@ -1,4 +1,4 @@
-package com.example.pizzaproject;
+package com.example.pizzaProject;
 
 import android.content.Context;
 

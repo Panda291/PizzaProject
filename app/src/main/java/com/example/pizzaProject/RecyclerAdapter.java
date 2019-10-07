@@ -1,4 +1,4 @@
-package com.example.pizzaproject;
+package com.example.pizzaProject;
 
 import android.database.Cursor;
 import android.util.Log;

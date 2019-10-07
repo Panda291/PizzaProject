@@ -1,4 +1,4 @@
-package com.example.pizzaproject;
+package com.example.pizzaProject;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class PizzaContentProvider extends ContentProvider {
-    public static final String AUTHORITY = "com.example.pizzaproject.PizzaContentProvider";
+    public static final String AUTHORITY = "com.example.pizzaProject";
     public static final String PIZZA_PATH = "pizza";
     public static final int ALL_PIZZAS = 100;
     public static final int PIZZA_ID = 101;

@@ -1,18 +1,14 @@
-package com.example.pizzaproject;
+package com.example.pizzaProject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-
-import java.net.URI;
 
 public class MainActivity extends AppCompatActivity implements RecyclerAdapter.ListItemClickListener{
 
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.L
         String[] whereArgs = new String[] {
         };
         String orderBy = "id";
-        Uri uri = Uri.parse("content://com.example.pizzaproject.PizzaContentProvider/pizza");
+        Uri uri = Uri.parse("content://com.example.pizzaProject/pizza");
         Cursor databaseOutput = resolver.query(uri, tableColumns, whereClause, whereArgs, orderBy);
 
         databaseOutput.moveToFirst();
