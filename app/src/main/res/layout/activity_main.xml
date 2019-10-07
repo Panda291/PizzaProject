@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="37dp" />
+        android:name="com.example.pizzaProject.OverviewFragment"
+        android:id="@+id/fr_overview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

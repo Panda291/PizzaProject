@@ -19,7 +19,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         void onListItemClick(int clickedItemIndex);
     }
 
-    public RecyclerAdapter(MainActivity mainActivity, Cursor database, ListItemClickListener listener) {
+    public RecyclerAdapter(Cursor database, ListItemClickListener listener) {
         Log.d("RecyclerAdapter", "onCreate");
         databaseOutput = database;
         mOnClickListener = listener;
