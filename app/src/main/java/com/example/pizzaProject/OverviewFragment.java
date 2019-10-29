@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,6 +62,22 @@ public class OverviewFragment extends Fragment implements RecyclerAdapter.ListIt
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Log.d("onListItemClick", String.valueOf(clickedItemIndex));
+        clickedItemIndex++;
+        Log.d("onListItemClick", String.valueOf(clickedItemIndex));
+        TextView selectedId = getActivity().findViewById(R.id.selectedId);
+        selectedId.setText(String.valueOf(clickedItemIndex));
+        Log.d("onlistitemclick", selectedId.getText().toString());
+
+        if(getActivity().findViewById(R.id.tablet) != null)
+        {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            DetailFragment detailFragment = new DetailFragment();
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fr_detail, detailFragment)
+                    .commit();
+        }
+
     }
 }
 

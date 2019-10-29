@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
@@ -35,14 +36,23 @@ public class PizzaContentProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Log.d("ContentProviderQuery", "main");
         int match = uriMatcher.match(uri);
+        Cursor databaseOutput;
         switch (match) {
             case ALL_PIZZAS:
                 Log.d("ContentProviderQuery", "ALL_PIZZAS");
-                Cursor databaseOutput = db.query("pizza", projection, selection, selectionArgs, null, null, sortOrder);
+                databaseOutput = db.query("pizza", projection, selection, selectionArgs, null, null, sortOrder);
                 return databaseOutput;
             case PIZZA_ID:
                 Log.d("ContentProviderQuery", "PIZZA_ID");
-                return null;
+
+                SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+                qb.setTables("pizza");
+                String sql = qb.buildQuery(projection, selection, null, null, sortOrder, null);
+                Log.d("Example", sql);
+
+                Log.d("Example", selection);
+                databaseOutput = db.query("pizza", projection, selection, null, null, null, sortOrder);
+                return databaseOutput;
             default:
                 Log.d("ContentProviderQuery", "default");
                 return null;

@@ -14,11 +14,12 @@ public class PizzaDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE pizza(id INTEGER PRIMARY KEY, name TEXT, price REAL)");
+        db.execSQL("CREATE TABLE pizza(id INTEGER PRIMARY KEY, name TEXT, price REAL, description TEXT)");
 
         ContentValues values = new ContentValues();
         values.put("name", "pizza margharita");
         values.put("price", 9.00);
+        values.put("description", "dough, tomato sauce, mozzarella cheese");
 
         long newRowId = db.insert("pizza", null, values);
         Log.d("rowID", String.valueOf(newRowId));
@@ -26,12 +27,14 @@ public class PizzaDbHelper extends SQLiteOpenHelper {
 
         values.put("name", "pizza mozzarella");
         values.put("price", 12.00);
+        values.put("description", "dough, tomato sauce, extra mozzarella cheese");
 
         db.insert("pizza", null, values);
         values = new ContentValues();
 
         values.put("name", "test pizza");
         values.put("price", 999.00);
+        values.put("description", "dough, tomato sauce, get yeeted on idiot");
 
         db.insert("pizza", null, values);
     }
