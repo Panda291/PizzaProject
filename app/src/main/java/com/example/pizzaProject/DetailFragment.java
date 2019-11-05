@@ -19,7 +19,7 @@ public class DetailFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fr_detailview, container);
+        View rootView = inflater.inflate(R.layout.fr_detailview, container, false);
 
         ContentResolver resolver = getActivity().getContentResolver();
 

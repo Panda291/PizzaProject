@@ -1,6 +1,7 @@
 package com.example.pizzaProject;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pizzaProject.DetailActivity;
 
 public class OverviewFragment extends Fragment implements RecyclerAdapter.ListItemClickListener {
 
@@ -64,18 +67,26 @@ public class OverviewFragment extends Fragment implements RecyclerAdapter.ListIt
         Log.d("onListItemClick", String.valueOf(clickedItemIndex));
         clickedItemIndex++;
         Log.d("onListItemClick", String.valueOf(clickedItemIndex));
-        TextView selectedId = getActivity().findViewById(R.id.selectedId);
-        selectedId.setText(String.valueOf(clickedItemIndex));
-        Log.d("onlistitemclick", selectedId.getText().toString());
+
 
         if(getActivity().findViewById(R.id.tablet) != null)
         {
+            TextView selectedId = getActivity().findViewById(R.id.selectedId);
+            selectedId.setText(String.valueOf(clickedItemIndex));
+            Log.d("onlistitemclick", selectedId.getText().toString());
+
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             DetailFragment detailFragment = new DetailFragment();
 
             fragmentManager.beginTransaction()
                     .replace(R.id.fr_detail, detailFragment)
                     .commit();
+        }
+        else
+        {
+            Intent myIntent = new Intent(getActivity(), DetailActivity.class);
+            myIntent.putExtra("EXTRA_ID", clickedItemIndex);
+            startActivity(myIntent);
         }
 
     }
