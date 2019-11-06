@@ -85,7 +85,7 @@ public class OverviewFragment extends Fragment implements RecyclerAdapter.ListIt
         else
         {
             Intent myIntent = new Intent(getActivity(), DetailActivity.class);
-            myIntent.putExtra("EXTRA_ID", clickedItemIndex);
+            myIntent.putExtra("EXTRA_ID", String.valueOf(clickedItemIndex));
             startActivity(myIntent);
         }
 

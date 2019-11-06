@@ -39,7 +39,8 @@ public class DetailFragment extends Fragment {
             uri = Uri.parse("content://com.example.pizzaProject/pizza/" + temp.getText().toString());
         } else {
             String temp = getActivity().getIntent().getStringExtra("EXTRA_ID");
-            whereArgs = new String[]{"id = " + temp};
+            whereArgs = new String[]{"id"};
+            whereClause = "id = " + temp;
             Log.d("findId(phone)", temp);
             uri = Uri.parse("content://com.example.pizzaProject/pizza/" + temp);
         }
