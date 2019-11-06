@@ -54,6 +54,18 @@ public class DetailFragment extends Fragment {
         TextView productDescription = rootView.findViewById(R.id.productDescription);
         productDescription.setText(databaseOutput.getString(databaseOutput.getColumnIndex("description")));
 
+        if (getActivity().findViewById(R.id.tablet) == null) {
+            TextView specificPrice = rootView.findViewById(R.id.specificPrice);
+            TextView specificName = rootView.findViewById(R.id.specificName);
+
+            String tempString = "€" + String.valueOf(databaseOutput.getFloat(databaseOutput.getColumnIndex("price")));
+
+            specificPrice.setText(tempString);
+            specificName.setText(databaseOutput.getString(databaseOutput.getColumnIndex("name")));
+
+            rootView.findViewById(R.id.detailViewLayoutLine).setVisibility(View.VISIBLE);
+        }
+
         databaseOutput.close();
 
         return rootView;

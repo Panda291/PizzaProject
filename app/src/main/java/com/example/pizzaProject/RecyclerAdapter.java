@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Log.d("onbind", String.valueOf(position));
+        //Log.d("onBind", String.valueOf(position));
         databaseOutput.moveToPosition(position);
         holder.descView.setText(databaseOutput.getString(databaseOutput.getColumnIndex("name")));
         holder.priceView.setText("€ " + String.valueOf(databaseOutput.getFloat(databaseOutput.getColumnIndex("price"))));
