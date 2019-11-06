@@ -32,11 +32,27 @@ public class PizzaDbHelper extends SQLiteOpenHelper {
         db.insert("pizza", null, values);
         values = new ContentValues();
 
-        values.put("name", "test pizza");
+        values.put("name", "my test pizza");
         values.put("price", 999.00);
-        values.put("description", "dough, tomato sauce, get yeeted on idiot");
+        values.put("description", "dough, tomato sauce, secret sauce");
 
         db.insert("pizza", null, values);
+
+
+        // START OF MASS DATABASE POPULATION
+
+        for(int i = 0; i < 50; i++)
+        {
+            values = new ContentValues();
+
+            values.put("name", "test pizza");
+            values.put("price", 999.00);
+            values.put("description", "dough, tomato sauce, test ingredients, this is a random string made as long as possible to see how my app reacts to it");
+
+            db.insert("pizza", null, values);
+        }
+
+        // END OF MASS DATABASE POPULATION
     }
 
     @Override

@@ -51,6 +51,9 @@ public class DetailFragment extends Fragment {
         databaseOutput.moveToFirst();
         Log.d("DetailOutput", databaseOutput.getString(1));
 
+        TextView productDescription = rootView.findViewById(R.id.productDescription);
+        productDescription.setText(databaseOutput.getString(databaseOutput.getColumnIndex("description")));
+
         databaseOutput.close();
 
         return rootView;
