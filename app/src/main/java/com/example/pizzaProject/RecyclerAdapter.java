@@ -25,6 +25,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         mOnClickListener = listener;
     }
 
+    public void UpdateRecyclerAdapter(Cursor database)
+    {
+        databaseOutput = database;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

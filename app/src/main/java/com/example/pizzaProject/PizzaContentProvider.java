@@ -18,6 +18,7 @@ public class PizzaContentProvider extends ContentProvider {
     public static final String PIZZA_PATH = "pizza";
     public static final int ALL_PIZZAS = 100;
     public static final int PIZZA_ID = 101;
+    public static final int ADD_PIZZA = 102;
     public static UriMatcher uriMatcher = buildUriMatcher();
 
     PizzaDbHelper mPizzaDbHelper;
@@ -59,6 +60,7 @@ public class PizzaContentProvider extends ContentProvider {
         }
     }
 
+
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
@@ -68,7 +70,11 @@ public class PizzaContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        Log.d("ContentProviderInsert", "main");
+        Log.d("ContentProviderInsert", values.toString());
+        long id = db.insert("pizza", null, values);
+        Uri newUri = Uri.parse("content://com.example.pizzaProject/pizza/" + id);
+        return newUri;
     }
 
     @Override
@@ -86,6 +92,7 @@ public class PizzaContentProvider extends ContentProvider {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(AUTHORITY, PIZZA_PATH, ALL_PIZZAS);
         uriMatcher.addURI(AUTHORITY, PIZZA_PATH + "/#", PIZZA_ID);
+        uriMatcher.addURI(AUTHORITY, PIZZA_PATH + "/add", ADD_PIZZA);
 
         return uriMatcher;
     }
