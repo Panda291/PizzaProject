@@ -46,10 +46,10 @@ public class PizzaContentProvider extends ContentProvider {
             case PIZZA_ID:
                 Log.d("ContentProviderQuery", "PIZZA_ID");
 
-                SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-                qb.setTables("pizza");
-                String sql = qb.buildQuery(projection, selection, null, null, sortOrder, null);
-                Log.d("Example", sql);
+//                SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+//                qb.setTables("pizza");
+//                String sql = qb.buildQuery(projection, selection, null, null, sortOrder, null);
+//                Log.d("Example", sql);
 
                 Log.d("Example", selection);
                 databaseOutput = db.query("pizza", projection, selection, null, null, null, sortOrder);
